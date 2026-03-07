@@ -141,3 +141,61 @@ std::string VIRTUAL_HALT = "beq zero,zero,0";
 std::unordered_map<std::string,int> LABEL;
 int REG_FILE[32] = {0};
 int DATA_MEMORY[32] = {0};
+
+std::unordered_map<std::string,std::string> instr_type = {
+    {"add", "R"},
+    {"sub", "R"},
+    {"sll", "R"},
+    {"slt", "R"},
+    {"sltu", "R"},
+    {"xor", "R"},
+    {"srl", "R"},
+    {"or", "R"},
+    {"and", "R"},
+
+    {"addi", "I"},
+    {"sltiu", "I"},
+    {"lw", "I"},
+    {"jalr", "I"},
+
+    {"sw", "S"},
+
+    {"beq", "B"},
+    {"bne", "B"},
+    {"blt", "B"},
+    {"bge", "B"},
+    {"bltu", "B"},
+    {"bgeu", "B"},
+
+    {"lui", "U"},
+    {"auipc", "U"},
+
+    {"jal", "J"}
+};
+
+
+
+std::string Binary(std::string number, int size){
+  int num = 0;
+  int pow = 1;
+  for(int a=number.size() - 1 ; a >= 0 ; a -= 1){
+    num += pow * (number[a] - '0');
+    pow *= 10;
+  }
+
+  std::string bin = "";
+
+  while(num > 0){
+    bin = ((num & 1) ? "1" : "0") + bin ;
+    num /= 2;
+  }
+
+  if(bin.size() > size){
+    return "-1";
+  }
+
+  while(bin.size() != size){
+    bin = "0" + bin;
+  }
+  return bin;
+}
