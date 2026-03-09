@@ -178,103 +178,34 @@ int HexToDecimal(std::string number);
 
 std::unordered_map<std::string, int> labels;
 
-std::string Binary(std::string number, int size, int line_no){
-  if(number.size() == 0) return "-1";
-  int num = 0;
-  int pow = 1;
-  bool flag = false;
+std::string Binary(std::string number, int size, int line_no) {
+    if (number.empty()) return "-1";
 
-  if(number[0] - '0' > 9 or number[0] - '0' < 0){
-    if(labels[number] == 0){
-      return "-2";
-    }
-    else{
-      num = (labels[number] - line_no) * 4;
-      flag = true;
-    }
-  }
-
-  if(number.size() > 2 && number[1] == 'x'){
-    num = HexToDecimal(number);
-    flag = true;
-  }
-
-  int Max = (1ll << (size - 1)) - 1;
-  int Min = -Max - 1;
-
-  for(int a=number.size() - 1 ; a >= 0 and !flag ; a -= 1){
-    if(number[a] == '-'){
-      num = -num;
-    }
-    else {
-      num += pow * (number[a] - '0');
-    }
-    if(num > Max) return "-1";
-    if(num < Min) return "-1";
-    pow *= 10;
-  }
-
-  printf("%lld ", num);
-
-  std::string bin = "";
-  bool complement = false;
-
-  if(num < 0){
-    num = - num;
-    complement = true;
-    // we nned to convert it into 2's compliment for this now
-  }
-
-  while(num > 0){
-    bin = ((num & 1) ? "1" : "0") + bin ;
-    num /= 2;
-  }
-
-  while(bin.size() != size){
-    bin = "0" + bin;
-  }
-
-  if(complement){
-    std::string Nbin = "";
-    int n = bin.size();
-    bool first = false;
-    for(int a = n - 1; a >= 0 ; a-=1){
-      if(first) Nbin = (bin[a] == '1' ? '0' : '1') + Nbin;
-      else Nbin = bin[a] + Nbin;
-      if(bin[a] == '1') first = true;
-    }
-    bin = Nbin;
-  }
-  return bin;
-}
-
-
-int HexToDecimal(std::string hex) {
-    unsigned int result = 0;
-    int start = 0;
-
-    if (hex.length() >= 2 && hex[0] == '0' && (hex[1] == 'x' || hex[1] == 'X')) {
-        start = 2;
-    }
-
-    for (int i = start; i < hex.length(); i++) {
-        char c = hex[i];
-        int value = 0;
-
-        if (c >= '0' && c <= '9') {
-            value = c - '0';
-        } 
-        else if (c >= 'A' && c <= 'F') {
-            value = c - 'A' + 10;
-        } 
-        else if (c >= 'a' && c <= 'f') {
-            value = c - 'a' + 10;
-        } 
-        else {
-            break; 
+    long long num = 0;
+    if (labels.find(number) != labels.end()) {
+        num = (labels[number] - line_no) * 4;
+    } else {
+        try {
+            num = std::stoll(number, nullptr, 0);
+        } catch (...) {
+            return "-2";
         }
-        result = (result << 4) | value;
     }
 
-    return result;
+    long long max_signed = (1LL << (size - 1)) - 1;
+    long long min_signed = -(1LL << (size - 1));
+    long long max_unsigned = (1LL << size) - 1;
+
+    if (num < min_signed || num > max_unsigned) {
+        return "-1";
+    }
+
+    std::string bin = "";
+    unsigned long long unum = (unsigned long long)num;
+
+    for (int i = 0; i < size; ++i) {
+        bin = std::to_string((unum >> i) & 1) + bin;
+    }
+
+    return bin;
 }
