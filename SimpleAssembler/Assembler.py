@@ -1,7 +1,7 @@
 # this is not the main code this is just a python wrapper that  calls for the object file created through cpp code 
 # and returns the output that is given by that file for main code logic you need to see main.cpp and for all the hardcoded 
 # libraries that are used in mina.cpp you can find all of that in Hardcode.cpp
-
+#thanks for reading
 
 
 import sys
