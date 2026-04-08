@@ -57,15 +57,15 @@ def _clear_residue(operating_system):
 		dirs = [
 			"tests/assembly/user_bin_s",
 			"tests/assembly/user_bin_h",
-			"tests/user_traces/simple",
-			"tests/user_traces/hard",
+			"tests/traces/simple",
+			"tests/traces/hard",
 		]
 	elif operating_system == 'windows':
 		dirs = [
 			"tests\\assembly\\user_bin_s",
 			"tests\\assembly\\user_bin_h",
-			"tests\\user_traces\\simple",
-			"tests\\user_traces\\hard",
+			"tests\\traces\\simple",
+			"tests\\traces\\hard",
 		]
 	else:
 		return

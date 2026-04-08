@@ -1,0 +1,28 @@
+[93m[1m==================================================[0m
+[93m[1m================ TESTING SIMULATOR ===============[0m
+[93m[1m==================================================[0m
+
+[94m[1mRuning simple tests[0m
+[91m[FAILED][0m simple_1.txt
+[91m[FAILED][0m simple_2.txt
+[91m[FAILED][0m simple_3.txt
+[91m[FAILED][0m simple_4.txt
+[91m[FAILED][0m simple_5.txt
+[91m[FAILED][0m test_case_1.txt
+[91m[FAILED][0m test_case_1_asm.txt
+[91m[FAILED][0m test_case_2.txt
+[94m[1m
+Running hard tests[0m
+[91m[FAILED][0m hard_1.txt
+[91m[FAILED][0m hard_2.txt
+[91m[FAILED][0m hard_3.txt
+[91m[FAILED][0m hard_4.txt
+[91m[FAILED][0m hard_5.txt
+
+============== RESULTS =================
+
+Simulator ===>
+[95mSimple: Marks = 0.0 out of 4.0
+Hard: Marks = 0.0 out of 2.5
+[1m[92mTotal: 0.0 out of 6.5
+[0m
